@@ -11,7 +11,7 @@ jobs:
       fail-fast: false # Keeps other jobs running if one fails
       matrix:
         # These folder names must match your repo folders exactly
-        service: [web, catalogue, cart, user, shipping, payment, mongodb, mysql, redis, ratings, dispatch]
+        service: [web, catalogue, cart, user, shipping, payment, ratings, dispatch]
 
     steps:
       - name: Checkout Code
