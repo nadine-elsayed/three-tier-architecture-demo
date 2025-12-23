@@ -13,7 +13,7 @@ on:
       - master
     paths:
       - '**.js'  # Only trigger on changes to Python files (**.py)
-      - '.github/workflows/cart.yaml'  # Include workflow file changes
+      - '.github/workflows/cart.yaml'  
 
 jobs:
   payment:
