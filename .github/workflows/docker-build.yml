@@ -8,9 +8,9 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false # Keeps other jobs running if one fails
+      fail-fast: false
       matrix:
-        # These folder names must match your repo folders exactly
+        # Verified list of custom microservices for Robot Shop
         service: [web, catalogue, cart, user, shipping, payment, ratings, dispatch]
 
     steps:
@@ -26,7 +26,8 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v4
         with:
+          # This ensures it looks inside the specific service folder
           context: ./${{ matrix.service }}
           push: true
-          # This tags the image as yourusername/rs-service:latest
+          # This tags it correctly for the K8s deployment to find later
           tags: ${{ secrets.DOCKER_USERNAME }}/rs-${{ matrix.service }}:latest
