@@ -7,13 +7,19 @@ ENV INSTANA_SERVICE_NAME=payment
 
 WORKDIR /app
 
+# Install build dependencies for uwsgi
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt /app/
 
-RUN pip install -r requirements.txt
+# Install requirements
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY *.py /app/
 COPY payment.ini /app/
 
-#CMD ["python", "payment.py"]
+# uWSGI needs to run the app
 CMD ["uwsgi", "--ini", "payment.ini"]
-
